@@ -1,9 +1,19 @@
-module mux_4_1(i0,i1,i2,i3,s0,s1,y);
+module mux4to1 (
+    input wire a,
+    input wire b,
+    input wire c,
+    input wire d,
+    input wire s1,
+    input wire s2,
+    output wire y
+);
 
-        input i0,i1,i2,i3;
-        input s0,s1;
-        output y;
-        
-        assign y = (~s1 & ~s0 & i0) | (~s1 & s0 & i1) | (s1 & ~s0 & i2) | (s1 & s0 & i3);
-        
+    assign y = (s1 & s2) ? d :
+              (s1 & ~s2) ? c :
+              (~s1 & s2) ? b :
+              (~s1 & ~s2) ? a :
+              1'bz;  
+
 endmodule
+
+
